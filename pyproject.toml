@@ -1,0 +1,59 @@
+[project]
+name = "asyncio_loop_local"
+version = "0.0.1"
+authors = [
+  { name="Alexander Sosedkin", email="monk@unboiled.info" },
+]
+description = "asyncio-loop-local storage, singletons and deferred __aexit__'s. Init that pool once and reuse it!"
+urls.homepage = "https://github.com/t184256/asyncio-loop-local"
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)"
+]
+requires-python = ">=3.11"
+dependencies = [] # no dependencies
+optional-dependencies.test = [
+  "pytest", "pytest-asyncio",
+  "coverage", "pytest-cov",
+  "mypy", "pytest-mypy",
+  "ruff",
+]
+
+[tool.pytest.ini_options]
+addopts = "--mypy --cov --cov-report term-missing --doctest-modules"
+
+[tool.coverage]
+run.source = [ "asyncio_loop_local" ]
+run.branch = true
+report.exclude_lines = [
+  "# pragma: no cover",
+  "if __name__ == .__main__.:",
+  "...  # overload",
+]
+report.fail_under = 100
+
+[tool.mypy]
+strict = true
+
+[tool.ruff]
+line-length = 79
+preview = true
+select = [ "ALL" ]
+ignore = [
+  "D105",  # undocumented-magic-method
+  "D203",  # one-blank-line-before-class
+  "D213",  # multi-line-summary-second-line
+]
+per-file-ignores."tests/**" = [
+  "INP001",  # implicit-namespace-package
+  "S101",  # assert
+]
+flake8-quotes.inline-quotes = "single"
+flake8-quotes.multiline-quotes = "single"
+flake8-copyright.notice-rgx = '# SPDX-FileCopyrightText: 2023 Alexander Sosedkin <monk@unboiled.info>\n# SPDX-License-Identifier: GPL-3.0\n'
+
+[tool.ruff.format]
+quote-style = "single"
+preview = true
