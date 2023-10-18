@@ -17,7 +17,8 @@ dependencies = [] # no dependencies
 optional-dependencies.test = [
   "pytest", "pytest-asyncio",
   "coverage", "pytest-cov",
-  "mypy", "pytest-mypy",
+  # https://github.com/python/mypy/issues/16278
+  "mypy!=1.6.0", "pytest-mypy",
   "ruff",
 ]
 
