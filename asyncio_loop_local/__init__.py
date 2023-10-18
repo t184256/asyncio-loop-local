@@ -11,6 +11,14 @@ from asyncio_loop_local._enter import enter
 from asyncio_loop_local._enter_once import enter_once
 from asyncio_loop_local._singleton import singleton
 from asyncio_loop_local._sticky_acm import sticky_acm
+from asyncio_loop_local._sticky_singleton_acm import sticky_singleton_acm
 from asyncio_loop_local._storage import storage
 
-__all__ = ['enter', 'enter_once', 'singleton', 'sticky_acm', 'storage']
+__all__ = [
+    'enter',
+    'enter_once',
+    'singleton',
+    'sticky_acm',
+    'sticky_singleton_acm',
+    'storage',
+]
