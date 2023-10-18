@@ -1,6 +1,6 @@
 [project]
 name = "asyncio_loop_local"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
   { name="Alexander Sosedkin", email="monk@unboiled.info" },
 ]
