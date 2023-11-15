@@ -127,7 +127,7 @@ alls['purpose'] = ('whatever', {'you': 'want'})
 If you wanna use locking, consider this:
 
 ```
-class LockingDict(dict, asyncio.Lock): pass
+class LockingDict(asyncio.Lock, dict): pass
 alls['careful'] = LockingDict()
 with alls['careful'] as d:
    d['a'] = 'b'

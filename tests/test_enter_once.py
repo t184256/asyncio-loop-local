@@ -52,3 +52,13 @@ def test_two_loops_enter_once() -> None:
     assert (acm.enters, acm.exits) == (2, 1)
     l2.close()
     assert (acm.enters, acm.exits) == (2, 2)
+
+
+@pytest.mark.asyncio()
+async def test_enter_once_parallel() -> None:
+    """Test enter_once executing in parallel."""
+    acm = CountingACM()
+    await asyncio.gather(
+        *[asyncio_loop_local.enter_once(acm) for _ in range(7)],
+    )
+    assert (acm.enters, acm.exits) == (1, 0)

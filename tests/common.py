@@ -3,6 +3,7 @@
 
 """Shared code between tests."""
 
+import asyncio
 import types
 import typing
 
@@ -18,7 +19,9 @@ class CountingACM:
         self.enters = self.exits = 0
 
     async def __aenter__(self: typing.Self) -> typing.Self:
+        await asyncio.sleep(0)  # give concurrency bugs a chance to manifest
         self.enters += 1
+        await asyncio.sleep(0)
         return self
 
     async def __aexit__(
@@ -27,5 +30,7 @@ class CountingACM:
         exc_val: BaseException | None,
         exc_tb: types.TracebackType | None,
     ) -> bool | None:
+        await asyncio.sleep(0)
         self.exits += 1
+        await asyncio.sleep(0)
         return None

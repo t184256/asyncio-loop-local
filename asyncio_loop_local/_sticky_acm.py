@@ -3,6 +3,7 @@
 
 """Enter context only once using `async with`, exit with the loop."""
 
+import asyncio
 import contextlib
 import types
 import typing
@@ -32,18 +33,23 @@ def sticky_acm(acm: _ACM[_T]) -> _ACM[_T]:
     class StickyACM:
         _entered: bool
         _val: _T | None
+        _lock: asyncio.Lock
 
         def __init__(self: typing.Self) -> None:
             self._entered = False
             self._val = None
+            self._lock = asyncio.Lock()
 
         async def __aenter__(self: typing.Self) -> _T:
             if self._entered:
                 return typing.cast(_T, self._val)
+            async with self._lock:
+                if self._entered:
+                    return typing.cast(_T, self._val)
 
-            self._entered = True
-            r = await asyncio_loop_local._enter.enter(acm)  # noqa: SLF001
-            self._val = r
+                r = await asyncio_loop_local._enter.enter(acm)  # noqa: SLF001
+                self._entered = True
+                self._val = r
             return r
 
         @staticmethod
