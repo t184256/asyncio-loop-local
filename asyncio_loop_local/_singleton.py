@@ -35,13 +35,16 @@ singleton_cache_key_sentinel = object()
 @typing.overload  # for decorating with singleton()
 def singleton(
     callable_: None = None,
-) -> typing.Callable[[typing.Callable[_P, _T]], typing.Callable[_P, _T]]:
-    ...  # overload
+) -> typing.Callable[
+    [typing.Callable[_P, _T]],
+    typing.Callable[_P, _T],
+]: ...  # overload
 
 
 @typing.overload  # for decorating with singleton
-def singleton(callable_: typing.Callable[_P, _T]) -> typing.Callable[_P, _T]:
-    ...  # overload
+def singleton(
+    callable_: typing.Callable[_P, _T],
+) -> typing.Callable[_P, _T]: ...  # overload
 
 
 # I want to be able to later extend it with parameters, so, two forms

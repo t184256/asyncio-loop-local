@@ -9,6 +9,7 @@ import typing
 import pytest
 
 import asyncio_loop_local
+from asyncio_loop_local._storage import _loop_local_storages
 
 
 @pytest.mark.asyncio()
@@ -49,8 +50,6 @@ def test_two_loops() -> None:
 
     l1.close()
     l2.close()
-
-    from asyncio_loop_local._storage import _loop_local_storages
 
     assert l1 in _loop_local_storages
     assert any(r == {'x': 0} for r in _loop_local_storages.values())
