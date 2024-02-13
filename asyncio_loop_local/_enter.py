@@ -13,7 +13,7 @@ _ACM = contextlib.AbstractAsyncContextManager
 
 
 async def enter(acm: _ACM[_T]) -> _T:
-    ret = await acm.__aenter__()
+    ret = await acm.__aenter__()  # noqa: PLC2801
 
     async def aexit_hook() -> None:
         await acm.__aexit__(None, None, None)

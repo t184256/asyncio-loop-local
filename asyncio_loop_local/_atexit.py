@@ -41,4 +41,4 @@ async def _fire() -> None:
     del ls[atexit_key_sentinel]
 
 
-__all__ = ['_register', '_fire']
+__all__ = ['_fire', '_register']
