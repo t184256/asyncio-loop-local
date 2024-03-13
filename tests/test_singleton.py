@@ -167,6 +167,7 @@ async def test_smoke_singleton_coroutine_decorator() -> None:
         coros.extend([coro(i), coro(i)])  # 0, 0, 1, 1, 2, 2, ...
     await asyncio.gather(*coros[:6])  # run 0, 1, 2; id duplicates don't run
     assert sorted(asyncio_loop_local.storage()['list']) == [0, 1, 2]
+    await asyncio.gather(*coros[6:])
 
 
 ###
@@ -189,3 +190,4 @@ async def test_smoke_singleton_coroutine_nb_decorator() -> None:
         coros.extend([coro2(i), coro2(i)])  # 0, 0, 1, 1, 2, 2, ...
     await asyncio.gather(*coros[:6])  # run 0, 1, 2; id duplicates don't run
     assert sorted(asyncio_loop_local.storage()['list']) == [0, 1, 2]
+    await asyncio.gather(*coros[6:])
