@@ -17,15 +17,21 @@ dependencies = [] # no dependencies
 optional-dependencies.test = [
   "pytest", "pytest-asyncio",
   "coverage", "pytest-cov",
-  "mypy", "pytest-mypy",
+]
+optional-dependencies.lint = [
+  "pre-commit",
+  "mypy",
   "ruff",
+  "codespell",
+  "actionlint-py",
+  "pre-commit-hooks",
 ]
 
 [tool.setuptools.package-data]
 "*" = ["py.typed"]
 
 [tool.pytest.ini_options]
-addopts = "--mypy --cov --cov-report term-missing --doctest-modules"
+addopts = "--cov --cov-report term-missing --doctest-modules"
 
 [tool.coverage]
 run.source = [ "asyncio_loop_local" ]
@@ -48,6 +54,7 @@ lint.ignore = [
   "D105",  # undocumented-magic-method
   "D203",  # one-blank-line-before-class
   "D213",  # multi-line-summary-second-line
+  "Q001",  # bad-quotes-multiline-string
 ]
 lint.per-file-ignores."tests/**" = [
   "INP001",  # implicit-namespace-package

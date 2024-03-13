@@ -124,7 +124,7 @@ alls = asyncio_loop_local._storage.storage()  # gives a loop-associated dict
 alls['purpose'] = ('whatever', {'you': 'want'})
 ```
 
-If you wanna use locking, consider this:
+If you want to use locking, consider this:
 
 ```
 class LockingDict(asyncio.Lock, dict): pass
